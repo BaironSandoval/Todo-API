@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import db from "./utils/database.js";
 import initModels from "./models/unitModels.js";
 import usersRoutes from "./components/users/users.routes.js"
@@ -22,7 +23,8 @@ db.sync()
 const PORT = process.env.PORT ?? 8000;
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 app.use(usersRoutes, tasksRoutes, categoriesRoutes);
 
 app.get("/", (req, res) => {
